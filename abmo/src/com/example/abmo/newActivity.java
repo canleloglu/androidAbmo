@@ -3,6 +3,7 @@ package com.example.abmo;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -17,6 +18,8 @@ public class newActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.newactivity);
+	    
+	    getActionBar().setDisplayHomeAsUpEnabled(true);
 	    
 	    Bundle bundle = getIntent().getExtras();
 	    String value = bundle.getString("name");
@@ -39,6 +42,12 @@ public class newActivity extends Activity {
 		});
 	    
 	}
-	
-	
+
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+	    if(item.getItemId()==android.R.id.home){
+	        finish();//finish your activity
+	    }
+	    return super.onMenuItemSelected(featureId, item);
+	}
 }
