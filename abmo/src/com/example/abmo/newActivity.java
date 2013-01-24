@@ -21,10 +21,6 @@ public class newActivity extends Activity {
 	    
 	    getActionBar().setDisplayHomeAsUpEnabled(true);
 	    
-	    Bundle bundle = getIntent().getExtras();
-	    String value = bundle.getString("name");
-	    Log.i("tag", value);	
-	    
 	    String[] items={"can","suna", "zerrin"};
 	    ListView listView = (ListView)findViewById(R.id.listView1);
 	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
