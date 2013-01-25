@@ -1,19 +1,19 @@
 package com.example.abmo;
 
+import java.sql.Struct;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class newActivity extends Activity {
-
-	/** Called when the activity is first created. */
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
@@ -21,19 +21,16 @@ public class newActivity extends Activity {
 	    
 	    getActionBar().setDisplayHomeAsUpEnabled(true);
 	    
-	    String[] items={"can","suna", "zerrin"};
+	    String[] items={"can","suna", "zerrin", "seden", "deniz", "birce", "aysin", "suleyman", "suleyman", "osman", "batu", "mert", "hasancan", "ekin"};
 	    ListView listView = (ListView)findViewById(R.id.listView1);
 	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, android.R.id.text1, items);
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(new OnItemClickListener() {
-
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				Toast.makeText(getApplicationContext(),
-						"Click ListItem Number " + position, Toast.LENGTH_LONG)
-						.show();
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Intent intent = new Intent(newActivity.this, taskDetail.class);
+			    startActivity(intent);
 			}
 		});
 	    
