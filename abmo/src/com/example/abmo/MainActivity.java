@@ -83,7 +83,7 @@ public class MainActivity extends Activity {
 		imm.hideSoftInputFromWindow(editSurname.getWindowToken(), 0);
 		
 		Intent intent = new Intent();
-		intent.setComponent(new ComponentName(this, newActivity.class));
+		intent.setComponent(new ComponentName(this, taskList.class));
 		startActivity(intent);
 	}
 	
