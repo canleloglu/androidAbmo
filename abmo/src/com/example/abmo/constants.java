@@ -1,7 +1,6 @@
 package com.example.abmo;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 enum taskProcess{
@@ -12,21 +11,21 @@ enum taskProcess{
 
 public class constants {
 	public List<task> taskArray = new ArrayList<task>();	
-	ArrayList<HashMap<String, String>> taskList = new ArrayList<HashMap<String, String>>();
+	
 	public void generateTask(){
-		task t = new task("Gorev 1", "4. odada problem var. Git oradaki problemi coz.", 0, "", "");
-		task t2 = new task("Gorev 1", "4. odada problem var. Git oradaki problemi coz.", 0, "", "");
-		task t3 = new task("Gorev 1", "4. odada problem var. Git oradaki problemi coz.", 0, "", "");
-		task t4 = new task("Gorev 1", "4. odada problem var. Git oradaki problemi coz.", 0, "", "");
-		task t5 = new task("Gorev 1", "4. odada problem var. Git oradaki problemi coz.", 0, "", "");
-		task t6 = new task("Gorev 1", "4. odada problem var. Git oradaki problemi coz.", 0, "", "");
-		task t7 = new task("Gorev 1", "4. odada problem var. Git oradaki problemi coz.", 0, "", "");
-		task t8 = new task("Gorev 1", "4. odada problem var. Git oradaki problemi coz.", 0, "", "");
-		task t9 = new task("Gorev 1", "4. odada problem var. Git oradaki problemi coz.", 0, "", "");
-		task t10 = new task("Gorev 1", "4. odada problem var. Git oradaki problemi coz.", 0, "", "");
-		task t11 = new task("Gorev 1", "4. odada problem var. Git oradaki problemi coz.", 0, "", "");
-		task t12 = new task("Gorev 1", "4. odada problem var. Git oradaki problemi coz.", 0, "", "");
-		task t13 = new task("Gorev 1", "4. odada problem var. Git oradaki problemi coz.", 0, "", "");
+		task t = new task("Gorev 1", "1. odada problem var. Git oradaki problemi coz.", 0, "image", "video");
+		task t2 = new task("Gorev 2", "2. odada problem var. Git oradaki problemi coz.", 0, "image", "video");
+		task t3 = new task("Gorev 3", "3. odada problem var. Git oradaki problemi coz.", 0, "image", "video");
+		task t4 = new task("Gorev 4", "4. odada problem var. Git oradaki problemi coz.", 0, "image", "video");
+		task t5 = new task("Gorev 5", "5. odada problem var. Git oradaki problemi coz.", 0, "image", "video");
+		task t6 = new task("Gorev 6", "6. odada problem var. Git oradaki problemi coz.", 0, "image", "video");
+		task t7 = new task("Gorev 7", "7. odada problem var. Git oradaki problemi coz.", 0, "image", "video");
+		task t8 = new task("Gorev 8", "8. odada problem var. Git oradaki problemi coz.", 0, "image", "video");
+		task t9 = new task("Gorev 9", "9. odada problem var. Git oradaki problemi coz.", 0, "image", "video");
+		task t10 = new task("Gorev 10", "10. odada problem var. Git oradaki problemi coz.", 0, "image", "video");
+		task t11 = new task("Gorev 11", "11. odada problem var. Git oradaki problemi coz.", 0, "image", "video");
+		task t12 = new task("Gorev 12", "12. odada problem var. Git oradaki problemi coz.", 0, "image", "video");
+		task t13 = new task("Gorev 13", "13. odada problem var. Git oradaki problemi coz.", 0, "image", "video");
 		
 		taskArray.add(t);
 		taskArray.add(t2);
@@ -40,47 +39,22 @@ public class constants {
 		taskArray.add(t10);
 		taskArray.add(t11);
 		taskArray.add(t12);
-		taskArray.add(t13);
-		
-		HashMap<String, String> map = new HashMap<String, String>();
-	    map.put("desc", t.desc);
-	    HashMap<String, String> map2 = new HashMap<String, String>();
-	    map2.put("desc", t2.desc);
-	    HashMap<String, String> map3 = new HashMap<String, String>();
-	    map3.put("desc", t3.desc);
-	    HashMap<String, String> map4 = new HashMap<String, String>();
-	    map4.put("desc", t4.desc);
-	    HashMap<String, String> map5 = new HashMap<String, String>();
-	    map5.put("desc", t5.desc);
-	    HashMap<String, String> map6 = new HashMap<String, String>();
-	    map6.put("desc", t6.desc);
-	    HashMap<String, String> map7 = new HashMap<String, String>();
-	    map7.put("desc", t7.desc);
-	    HashMap<String, String> map8 = new HashMap<String, String>();
-	    map8.put("desc", t8.desc);
-	    HashMap<String, String> map9 = new HashMap<String, String>();
-	    map9.put("desc", t9.desc);
-	    HashMap<String, String> map10 = new HashMap<String, String>();
-	    map10.put("desc", t10.desc);
-	    HashMap<String, String> map11 = new HashMap<String, String>();
-	    map11.put("desc", t11.desc);
-	    HashMap<String, String> map12 = new HashMap<String, String>();
-	    map12.put("desc", t12.desc);
-	    HashMap<String, String> map13 = new HashMap<String, String>();
-	    map13.put("desc", t13.desc);
-        
-		taskList.add(0, map);
-		taskList.add(0, map2);
-		taskList.add(0, map3);
-		taskList.add(0, map4);
-		taskList.add(0, map5);
-		taskList.add(0, map6);
-		taskList.add(0, map7);
-		taskList.add(0, map8);
-		taskList.add(0, map9);
-		taskList.add(0, map10);
-		taskList.add(0, map11);
-		taskList.add(0, map12);
-		taskList.add(0, map13);		
+		taskArray.add(t13);	
+	}
+	
+	static String stringForProgress(int progress){
+		String progressText;
+		if(progress  == 0){
+        	progressText = "Henuz Baslanmadi";
+        }else if (progress > 0 && progress < 25){
+        	progressText = "Goreve baslandi";
+        }else if (progress >= 25 && progress < 75){
+        	progressText = "Gorev yarilandi";
+        }else if(progress >= 75 && progress < 100){
+        	progressText = "Gorev bitmek uzere";
+        }else{
+        	progressText = "Gorev bitti";
+        }
+		return progressText;
 	}
 }
