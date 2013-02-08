@@ -10,37 +10,36 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 public class taskList extends Activity {
-	public constants c;
+	public myApp appd;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.tasklist);
 	    
 	    getActionBar().setDisplayHomeAsUpEnabled(true);
-	    
-	    c = new constants();
-	    c.generateTask();
+	   	appd = (myApp)getApplication();
+	    appd.generateTask();
 
 	    ListView listView = (ListView)findViewById(R.id.listView1);
-	    taskAdapter adapter = new taskAdapter(this, c.taskArray);	    
-		listView.setAdapter(adapter);		
+	    taskAdapter adapter = new taskAdapter(this, appd.taskList);
+		listView.setAdapter(adapter);
         
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Intent intent = new Intent(taskList.this, taskDetail.class);
-				task t = taskList.this.c.taskArray.get(position);
+				task t = taskList.this.appd.taskList.get(position);
 				intent.putExtra("task", t);
+				intent.putExtra("index", position);
 			    startActivity(intent);
 			}
 		});
-	    
 	}
 
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 	    if(item.getItemId()==android.R.id.home){
-	        finish();//finish your activity
+	        finish();
 	    }
 	    return super.onMenuItemSelected(featureId, item);
 	}
