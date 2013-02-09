@@ -20,7 +20,7 @@
         
         <TextView
         android:id="@+id/textView"
-        android:layout_width="70dp"
+        android:layout_width="90dp"
         android:layout_height="wrap_content"    
         android:textColor="#FFFFFF"    
         android:text="@string/name" />
@@ -45,7 +45,7 @@
         
         <TextView
         android:id="@+id/textView3"
-        android:layout_width="70dp"
+        android:layout_width="90dp"
         android:layout_height="wrap_content"
         android:textColor="#FFFFFF" 
         android:text="@string/surname" />
@@ -78,7 +78,7 @@
         android:textColor="#FFFFFF" 
         android:text="Submit"
         android:gravity="center"
-        android:onClick="submit" 
+        android:onClick="request" 
         />
 
 </LinearLayout>

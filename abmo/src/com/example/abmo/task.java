@@ -8,7 +8,9 @@ public class task implements Parcelable{
 	public String taskDetail;
 	public int progress;
 	public String imageURL;
-	public String videoURL;	
+	public String videoURL;
+	
+	public task(){}
 	
 	public task(String newDesc, String newTaskDetail, int newProgress, String newImageURL, String newVideoURL){
 		desc = newDesc;
