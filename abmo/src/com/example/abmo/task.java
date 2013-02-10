@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class task implements Parcelable{
+	public int taskid;
 	public String desc;
 	public String taskDetail;
 	public int progress;
@@ -12,7 +13,8 @@ public class task implements Parcelable{
 	
 	public task(){}
 	
-	public task(String newDesc, String newTaskDetail, int newProgress, String newImageURL, String newVideoURL){
+	public task(int newtaskid, String newDesc, String newTaskDetail, int newProgress, String newImageURL, String newVideoURL){
+		taskid = newtaskid;
 		desc = newDesc;
 		taskDetail = newTaskDetail;
 		progress = newProgress;
@@ -21,6 +23,7 @@ public class task implements Parcelable{
 	}
 	
 	public task(Parcel in){		
+		taskid = in.readInt();
 		desc = in.readString();
 		taskDetail = in.readString();
 		imageURL = in.readString();
@@ -30,6 +33,7 @@ public class task implements Parcelable{
 	
 	// write your object's data to the passed-in Parcel
     public void writeToParcel(Parcel out, int flags) {
+    	out.writeInt(taskid);
         out.writeString(desc);
         out.writeString(taskDetail);
         out.writeString(imageURL);

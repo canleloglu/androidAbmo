@@ -9,7 +9,7 @@ import android.widget.TextView;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
 public class taskDetail extends Activity {
-
+	public task t;
 	public int index;
 	myApp appd;
 	/** Called when the activity is first created. */
@@ -22,7 +22,7 @@ public class taskDetail extends Activity {
 	    appd = (myApp)getApplication();
 	    
 	    Intent i = getIntent();
-	    task t = (task) i.getParcelableExtra("task");
+	    t = (task) i.getParcelableExtra("task");
 	    Bundle b = getIntent().getExtras();
 	    index = b.getInt("index");
 	    
@@ -38,7 +38,9 @@ public class taskDetail extends Activity {
 	    progressText.setText(constants.stringForProgress(t.progress));
 	    
 	    taskprogress.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-		    public void onStopTrackingTouch(SeekBar arg0) {}
+		    public void onStopTrackingTouch(SeekBar arg0) {
+		    	appd.updateTask(t.taskid, arg0.getProgress());
+		    }
 		    public void onStartTrackingTouch(SeekBar arg0) {}
 		    public void onProgressChanged(SeekBar arg0, int progress, boolean arg2) {
 		    	TextView progressText = (TextView)findViewById(R.id.progresstext);

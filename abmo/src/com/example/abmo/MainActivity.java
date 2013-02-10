@@ -39,38 +39,14 @@ import android.widget.TextView.OnEditorActionListener;
 
 public class MainActivity extends Activity {
 	public int i = 1;
-	public List<Person> personList = new ArrayList<Person>();
-	
-	
-	public String getNodeValueByTagName(Node parentNode, String tagNameOfNode)
-	{
-	    String nodeValue = "";
-	    if (((Element) parentNode).getElementsByTagName(tagNameOfNode).getLength() != 0)
-	        if (((Element) ((Element) parentNode).getElementsByTagName(tagNameOfNode).item(0)).hasChildNodes())
-	        {
-	            nodeValue = ((Node) ((Element) ((Element) parentNode).getElementsByTagName(tagNameOfNode).item(0)).getChildNodes().item(0)).getNodeValue();
-	        }
-	    return nodeValue;
-	}
-
-	public String getNodeAttributeByTagName(Node parentNode, String tagNameOfAttr)
-	{
-	    String nodeValue = "";
-
-	    NamedNodeMap questNodeAttr = parentNode.getAttributes();
-
-	    if (questNodeAttr.getLength() != 0)
-	        nodeValue = questNodeAttr.getNamedItem(tagNameOfAttr).getTextContent();
-
-	    return nodeValue;
-	}
-	
+	public myApp appd;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);	
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-		StrictMode.setThreadPolicy(policy); 
+		StrictMode.setThreadPolicy(policy);
+		appd = (myApp)getApplication();
 	}
 	
 	@Override
@@ -80,53 +56,18 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	
-	public void connect(String url)
-	{
-		HttpClient httpClient = new DefaultHttpClient();
-        HttpPost httpPost = new HttpPost(url); 	    
-	    try {
-	        HttpResponse response = httpClient.execute(httpPost);
-	        HttpEntity r_entity = response.getEntity();
-	        String xmlString = EntityUtils.toString(r_entity);
-	        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-	        DocumentBuilder db = factory.newDocumentBuilder();
-	        InputSource inStream = new InputSource();
-	        inStream.setCharacterStream(new StringReader(xmlString));
-	        Document doc = db.parse(inStream);
-	        doc.getDocumentElement().normalize();
-
-	        NodeList staffNodeList = doc.getElementsByTagName("task");
-
-	        for (int i = 0; i < staffNodeList.getLength(); i++)
-	        {
-	            Node taskNode = staffNodeList.item(i);
-	            task t = new task();
-	            t.desc = getNodeValueByTagName(taskNode, "desc");
-	            t.taskDetail = getNodeValueByTagName(taskNode, "detail");
-	            t.imageURL = getNodeValueByTagName(taskNode, "image");
-	            t.videoURL = getNodeValueByTagName(taskNode, "video");
-	            t.progress = Integer.parseInt(getNodeValueByTagName(taskNode, "progress"));	            
-	        }
-	    } catch (Exception e) {
-	    	Log.e("tag", e.toString());
-	    }
-	}
-	
-	public void request (View target) throws ClientProtocolException, IOException{
-		connect("http://www.estenerji.com/webservice/WebService1.asmx/getTasks");
-	}
-	
 	public void submit (View target){
 		EditText editName = (EditText)findViewById(R.id.editText1);
-		EditText editSurname = (EditText)findViewById(R.id.editText2);
+		EditText editPass = (EditText)findViewById(R.id.editText2);
 		
-		Person p = new Person();
-		p.name = editName.getText().toString();
-		p.surname = editSurname.getText().toString();
-		personList.add(p);
-		
+		if(appd.login(editName.getText().toString(), editPass.getText().toString())){
+			appd.getTasks();
+			Intent intent = new Intent();
+			intent.setComponent(new ComponentName(this, taskList.class));
+			startActivity(intent);
+		}
 		editName.setText("");
-		editSurname.setText("");
+		editPass.setText("");
 		
 		editName.setOnEditorActionListener(new OnEditorActionListener() {
 		    @Override
@@ -143,7 +84,7 @@ public class MainActivity extends Activity {
 		        return false;
 		    }
 		});
-		editSurname.setOnEditorActionListener(new OnEditorActionListener() {
+		editName.setOnEditorActionListener(new OnEditorActionListener() {
 		    @Override
 		    public boolean onEditorAction(TextView v, int keyCode,
 		            KeyEvent event) {
@@ -161,16 +102,6 @@ public class MainActivity extends Activity {
 
 		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow(editName.getWindowToken(), 0);
-		imm.hideSoftInputFromWindow(editSurname.getWindowToken(), 0);
-		
-		Intent intent = new Intent();
-		intent.setComponent(new ComponentName(this, taskList.class));
-		startActivity(intent);
-	}
-	
-	public void log (View target){
-		for(int i = 0; i < personList.size(); i++){	
-			Log.i("tag", personList.get(i).name + " " + personList.get(i).surname);
-		}
+		imm.hideSoftInputFromWindow(editPass.getWindowToken(), 0);
 	}
 }

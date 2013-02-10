@@ -11,17 +11,17 @@ import android.widget.ListView;
 
 public class taskList extends Activity {
 	public myApp appd;
+	taskAdapter adapter;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.tasklist);
 	    
 	    getActionBar().setDisplayHomeAsUpEnabled(true);
-	   	appd = (myApp)getApplication();
-	    appd.generateTask();
+	   	appd = (myApp)getApplication();	    
 
 	    ListView listView = (ListView)findViewById(R.id.listView1);
-	    taskAdapter adapter = new taskAdapter(this, appd.taskList);
+	    adapter = new taskAdapter(this, appd.taskList);
 		listView.setAdapter(adapter);
         
 		listView.setOnItemClickListener(new OnItemClickListener() {
@@ -42,5 +42,10 @@ public class taskList extends Activity {
 	        finish();
 	    }
 	    return super.onMenuItemSelected(featureId, item);
+	}
+	
+	public void refresh(View view){
+		appd.getTasks();
+		adapter.notifyDataSetChanged();
 	}
 }
