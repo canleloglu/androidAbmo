@@ -3,12 +3,17 @@ package com.example.abmo;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.MediaController;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 public class taskDetail extends Activity {
 	public task t;
@@ -41,8 +46,14 @@ public class taskDetail extends Activity {
 	    
 	    if(!t.imageURL.equals("")){
 	    	ImageView imageView = (ImageView)findViewById(R.id.imageView1);
+	    	imageView.setVisibility(0);
 	    	Bitmap bit = constants.loadImage(t.imageURL);
 	    	imageView.setImageBitmap(bit);
+	    }
+	    if(!t.videoURL.equals("")){
+	    	VideoView videoView = (VideoView)findViewById(R.id.videoView2);
+	    	videoView.setVisibility(0);
+	    	showVideo(t.videoURL);
 	    }
 	    
 	    taskprogress.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
@@ -64,5 +75,18 @@ public class taskDetail extends Activity {
 	        finish();
 	    }
 	    return super.onMenuItemSelected(featureId, item);
+	}
+	
+	public void showVideo(String src){				
+		VideoView videoView = (VideoView)findViewById(R.id.videoView2);
+		videoView.setVisibility(1);
+	    MediaController mediaController= new MediaController(this);
+	    mediaController.setAnchorView(videoView);        
+	    Uri uri= Uri.parse(src);        
+	    videoView.setMediaController(mediaController);
+	    videoView.setVideoURI(uri);        
+	    videoView.requestFocus();
+
+	    videoView.start();
 	}
 }
