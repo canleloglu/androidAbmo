@@ -2,11 +2,13 @@ package com.example.abmo;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.SeekBar;
-import android.widget.TextView;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
 
 public class taskDetail extends Activity {
 	public task t;
@@ -36,6 +38,12 @@ public class taskDetail extends Activity {
 	    taskprogress.setMax(100);
 	    taskprogress.setProgress(t.progress);
 	    progressText.setText(constants.stringForProgress(t.progress));
+	    
+	    if(!t.imageURL.equals("")){
+	    	ImageView imageView = (ImageView)findViewById(R.id.imageView1);
+	    	Bitmap bit = constants.loadImage(t.imageURL);
+	    	imageView.setImageBitmap(bit);
+	    }
 	    
 	    taskprogress.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 		    public void onStopTrackingTouch(SeekBar arg0) {

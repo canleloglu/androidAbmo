@@ -1,8 +1,18 @@
 package com.example.abmo;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 
 enum taskProcess{
 	TASKPROCESSJUSTSTARTED,
@@ -50,4 +60,31 @@ public class constants {
 
 	    return nodeValue;
 	}
+	
+	public static Bitmap loadImage(String image_location)
+	{    	 
+          URL imageURL = null;
+          
+          try {
+        	  imageURL = new URL(image_location);
+          }
+          
+          catch (MalformedURLException e) {
+              e.printStackTrace();
+          }
+          
+          try {
+        	  HttpURLConnection connection= (HttpURLConnection)imageURL.openConnection();
+        	  connection.setDoInput(true);
+        	  connection.connect();
+              InputStream inputStream = connection.getInputStream();
+               
+              Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+              return bitmap;
+          }
+          catch (IOException e) {
+              Log.e("tag", e.toString());
+          }
+          return null;
+     }
 }
